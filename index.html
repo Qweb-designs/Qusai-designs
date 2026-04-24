@@ -1,274 +1,347 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Qweb Designs | Luxury Landing Pages & Web Development</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Qweb Designs | Luxury Web Solutions</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <style>
-    /* --- Root & Base Styles --- */
-    :root {
-      --bg-dark: #0c0c0c;
-      --bg-surface: #161616;
-      --bg-card: #1e1e1e;
-      --text-main: #ffffff;
-      --text-dim: #a0a0a0;
-      --accent: #ff4d00;
-      --accent-hover: #e64500;
-      --font-en: 'Poppins', sans-serif;
-      --font-ar: 'Cairo', sans-serif;
-      --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+    <style>
+        /* --- الأساسيات والسمات --- */
+        :root {
+            --bg-dark: #0c0c0c;
+            --bg-surface: #141414;
+            --accent: #ff4d00;
+            --accent-glow: rgba(255, 77, 0, 0.3);
+            --text-main: #ffffff;
+            --text-dim: #999;
+            --font-en: 'Poppins', sans-serif;
+            --font-ar: 'Cairo', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
-    html { scroll-behavior: smooth; }
-    body { background-color: var(--bg-dark); color: var(--text-main); font-family: var(--font-en); overflow-x: hidden; line-height: 1.6; }
-    body.rtl { direction: rtl; font-family: var(--font-ar); }
-    img { max-width: 100%; display: block; }
-    a { text-decoration: none; color: inherit; transition: var(--transition); }
-    ul { list-style: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--bg-dark); color: var(--text-main); font-family: var(--font-en); line-height: 1.6; overflow-x: hidden; }
+        body.rtl { direction: rtl; font-family: var(--font-ar); }
 
-    /* --- Utilities --- */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 25px; }
-    .section-padding { padding: 100px 0; }
-    .accent-text { color: var(--accent); }
-    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 32px; border-radius: 50px; font-weight: 600; font-size: 1rem; cursor: pointer; border: 2px solid transparent; gap: 10px; }
-    .btn-primary { background-color: var(--accent); color: #fff; }
-    .btn-primary:hover { background-color: transparent; border-color: var(--accent); color: var(--accent); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 77, 0, 0.2); }
-    .btn-outline { border-color: #333; color: #fff; }
-    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .accent { color: var(--accent); }
 
-    /* --- Navbar --- */
-    #navbar { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 25px 0; transition: var(--transition); }
-    #navbar.scrolled { background: rgba(12, 12, 12, 0.95); backdrop-filter: blur(10px); padding: 15px 0; border-bottom: 1px solid #222; }
-    .nav-content { display: flex; align-items: center; justify-content: space-between; }
-    .logo-area { display: flex; align-items: center; gap: 12px; }
-    .logo-area img { width: 45px; height: 45px; object-fit: contain; border-radius: 10px; }
-    .logo-area h2 { font-size: 1.6rem; font-weight: 800; }
-    .nav-links { display: flex; align-items: center; gap: 35px; }
-    .nav-links a { font-weight: 500; font-size: 0.95rem; opacity: 0.8; }
-    .nav-links a:hover { opacity: 1; color: var(--accent); }
-    .nav-actions { display: flex; align-items: center; gap: 20px; }
-    .lang-switcher { background: var(--bg-surface); border: 1px solid #333; color: #fff; padding: 8px 16px; border-radius: 20px; font-weight: 700; cursor: pointer; font-size: 0.85rem; }
-    .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
+        /* --- الهيدر (Navbar) --- */
+        #navbar {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 20px 0;
+            z-index: 2000;
+            transition: var(--transition);
+        }
+        #navbar.scrolled {
+            background: rgba(12, 12, 12, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 12px 0;
+            border-bottom: 1px solid #222;
+        }
 
-    /* --- Hero Section --- */
-    #hero { min-height: 100vh; display: flex; align-items: center; position: relative; background: radial-gradient(circle at top right, rgba(255, 77, 0, 0.05), transparent); }
-    .hero-box { max-width: 850px; }
-    .badge { background: rgba(255, 77, 0, 0.1); color: var(--accent); padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 700; display: inline-block; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
-    .hero-box h1 { font-size: clamp(2.5rem, 8vw, 4.8rem); line-height: 1.1; margin-bottom: 30px; font-weight: 800; }
-    .hero-box p { font-size: 1.25rem; color: var(--text-dim); margin-bottom: 40px; max-width: 650px; font-weight: 300; }
-    .hero-btns { display: flex; gap: 20px; flex-wrap: wrap; }
+        .nav-flex { display: flex; align-items: center; justify-content: space-between; }
+        
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        /* تم إصلاح رابط اللوغو ليقرأ الصورة المرفوعة */
+        .logo img { width: 45px; height: 45px; border-radius: 8px; border: 1px solid #333; }
+        .logo span { font-size: 1.5rem; font-weight: 800; color: #fff; }
 
-    /* --- Portfolio Section --- */
-    #portfolio { background-color: var(--bg-surface); }
-    .section-title { text-align: center; margin-bottom: 60px; }
-    .section-title h2 { font-size: 2.8rem; margin-bottom: 15px; font-weight: 700; }
-    .section-title p { color: var(--text-dim); font-size: 1.1rem; }
-    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
-    .project-card { background: var(--bg-card); border-radius: 24px; overflow: hidden; border: 1px solid #282828; position: relative; }
-    .project-card:hover { transform: translateY(-12px); border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-    .card-thumb { height: 260px; position: relative; overflow: hidden; }
-    .card-thumb img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
-    .project-card:hover .card-thumb img { transform: scale(1.1); filter: brightness(0.7); }
-    .card-info { padding: 30px; }
-    .card-info span { color: var(--accent); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-    .card-info h3 { font-size: 1.6rem; margin: 10px 0 15px; }
-    .view-btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.95rem; border-bottom: 2px solid var(--accent); padding-bottom: 4px; }
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
 
-    /* --- Contact Section --- */
-    #contact { position: relative; overflow: hidden; }
-    .contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
-    .contact-text h2 { font-size: 3rem; margin-bottom: 25px; }
-    .contact-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .c-card { background: var(--bg-surface); padding: 30px; border-radius: 20px; border: 1px solid #222; transition: var(--transition); }
-    .c-card:hover { background: var(--bg-card); border-color: var(--accent); }
-    .c-card i { font-size: 2rem; color: var(--accent); margin-bottom: 20px; }
-    .c-card h4 { margin-bottom: 10px; font-size: 1.2rem; }
-    .c-card p { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 15px; }
-    .c-card a { font-weight: 700; color: #fff; font-size: 1rem; }
+        .nav-btns { display: flex; align-items: center; gap: 15px; }
+        .lang-btn {
+            background: var(--bg-surface);
+            border: 1px solid #333;
+            color: #fff;
+            padding: 6px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
 
-    /* --- Footer --- */
-    footer { padding: 50px 0; border-top: 1px solid #222; text-align: center; }
-    .footer-content p { color: #555; font-size: 0.95rem; }
+        /* القائمة الجوال */
+        .menu-btn { display: none; font-size: 1.5rem; color: #fff; cursor: pointer; }
 
-    /* --- Mobile Responsive --- */
-    @media (max-width: 992px) {
-      .contact-container { grid-template-columns: 1fr; text-align: center; }
-      .contact-cards { grid-template-columns: 1fr; }
-      .hero-box { text-align: center; margin: 0 auto; }
-      .hero-btns { justify-content: center; }
-      .nav-links { display: none; }
-      .menu-toggle { display: block; }
-    }
-  </style>
+        @media (max-width: 992px) {
+            .nav-links {
+                position: fixed;
+                top: 0; right: -100%;
+                width: 70%; height: 100vh;
+                background: var(--bg-surface);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 0.4s;
+                z-index: 1000;
+            }
+            .nav-links.active { right: 0; }
+            .menu-btn { display: block; }
+            body.rtl .nav-links { right: auto; left: -100%; }
+            body.rtl .nav-links.active { left: 0; }
+        }
+
+        /* --- البطل (Hero) --- */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: radial-gradient(circle at 80% 20%, rgba(255, 77, 0, 0.05), transparent);
+        }
+        .hero-content { max-width: 800px; }
+        .hero-badge {
+            background: rgba(255, 77, 0, 0.1);
+            color: var(--accent);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        .hero-content h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; margin-bottom: 25px; font-weight: 800; }
+        .hero-content p { font-size: 1.2rem; color: var(--text-dim); margin-bottom: 35px; max-width: 600px; }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .btn-main { background: var(--accent); color: #fff; }
+        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 10px 20px var(--accent-glow); }
+        .btn-sec { border: 2px solid #333; color: #fff; margin-left: 15px; }
+        body.rtl .btn-sec { margin-left: 0; margin-right: 15px; }
+
+        /* --- معرض الأعمال (Portfolio) --- */
+        .section { padding: 100px 0; }
+        .section-head { text-align: center; margin-bottom: 60px; }
+        .section-head h2 { font-size: 2.5rem; margin-bottom: 10px; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        .card {
+            background: var(--bg-surface);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #222;
+            transition: var(--transition);
+        }
+        .card:hover { transform: translateY(-10px); border-color: var(--accent); }
+        
+        .card-img { height: 240px; background-size: cover; background-position: center; transition: 0.5s; }
+        .card:hover .card-img { transform: scale(1.05); }
+        
+        .card-body { padding: 25px; }
+        .card-body span { color: var(--accent); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; }
+        .card-body h3 { margin: 10px 0 15px; font-size: 1.5rem; }
+        .card-link { color: #fff; text-decoration: none; font-weight: 600; border-bottom: 2px solid var(--accent); padding-bottom: 4px; }
+
+        /* --- التواصل (Contact) --- */
+        #contact { background: #0a0a0a; }
+        .contact-flex { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .contact-info h2 { font-size: 3rem; margin-bottom: 20px; }
+        
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .c-box { background: var(--bg-surface); padding: 25px; border-radius: 15px; border: 1px solid #222; }
+        .c-box i { font-size: 1.8rem; color: var(--accent); margin-bottom: 15px; }
+        .c-box a { color: #fff; text-decoration: none; font-weight: 700; word-break: break-all; }
+
+        footer { text-align: center; padding: 40px; color: #444; border-top: 1px solid #111; }
+
+        @media (max-width: 768px) {
+            .contact-flex { grid-template-columns: 1fr; text-align: center; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .btn-sec { margin: 10px 0 0 0; width: 100%; justify-content: center; }
+            .btn-main { width: 100%; justify-content: center; }
+        }
+    </style>
 </head>
 <body>
 
-  <nav id="navbar">
-    <div class="container nav-content">
-      <a href="#" class="logo-area">
-        <img src="https://i.ibb.co/Lzy0M09m/1000031794.png" alt="Qweb Logo">
-        <h2>Qweb<span>.</span></h2>
-      </a>
-      <ul class="nav-links">
-        <li><a href="#hero" data-i18n="nav.home">Home</a></li>
-        <li><a href="#portfolio" data-i18n="nav.portfolio">Projects</a></li>
-        <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
-      </ul>
-      <div class="nav-actions">
-        <button id="langSwitcher" class="lang-switcher">AR</button>
-        <div class="menu-toggle"><i class="fa-solid fa-bars"></i></div>
-      </div>
-    </div>
-  </nav>
+    <nav id="navbar">
+        <div class="container nav-flex">
+            <a href="#" class="logo">
+                <img src="https://i.ibb.co/Lzy0M09m/1000031794.png" alt="Qweb Logo">
+                <span>Qweb<span class="accent">.</span></span>
+            </a>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero" data-i18n="nav.home">Home</a></li>
+                <li><a href="#portfolio" data-i18n="nav.portfolio">Projects</a></li>
+                <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+            </ul>
 
-  <main>
+            <div class="nav-btns">
+                <button class="lang-btn" id="langBtn">AR</button>
+                <div class="menu-btn" id="menuToggle"><i class="fa-solid fa-bars"></i></div>
+            </div>
+        </div>
+    </nav>
+
     <section id="hero">
-      <div class="container">
-        <div class="hero-box">
-          <div class="badge" data-i18n="hero.badge">Professional Web Solutions</div>
-          <h1 id="heroTitle">Crafting <span class="accent-text">Luxury Digital</span> Experiences</h1>
-          <p id="heroDesc">I build high-performance, custom landing pages from scratch. Focused on clean aesthetics and seamless user journeys for premium brands.</p>
-          <div class="hero-btns">
-            <a href="#portfolio" class="btn btn-primary" data-i18n="hero.cta1">Explore Work</a>
-            <a href="https://wa.me/962780576584" class="btn btn-outline" data-i18n="hero.cta2">Get a Quote</a>
-          </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge" data-i18n="hero.badge">Qweb Designs · by Qusai</div>
+                <h1 id="heroTitle">Crafting <span class="accent">Luxury Digital</span> Experiences</h1>
+                <p id="heroDesc">I build high-performance, custom landing pages from scratch. Focused on clean aesthetics and premium user journeys.</p>
+                <div class="hero-actions">
+                    <a href="#portfolio" class="btn btn-main" data-i18n="hero.btn1">View My Work</a>
+                    <a href="https://wa.me/962780576584" class="btn btn-sec" data-i18n="hero.btn2">Get a Quote</a>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <section id="portfolio" class="section-padding">
-      <div class="container">
-        <div class="section-title">
-          <h2 data-i18n="portfolio.title">Selected Works</h2>
-          <p data-i18n="portfolio.sub">A showcase of premium design and clean code.</p>
+    <section id="portfolio" class="section">
+        <div class="container">
+            <div class="section-head">
+                <h2 data-i18n="port.title">Recent Projects</h2>
+                <p data-i18n="port.sub">Showcasing premium web design and development.</p>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=800');"></div>
+                    <div class="card-body">
+                        <span data-i18n="tag.store">E-Commerce</span>
+                        <h3>Qusai Store</h3>
+                        <a href="https://qweb-designs.github.io/Qusai-store/" target="_blank" class="card-link" data-i18n="link">Open Project</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=800');"></div>
+                    <div class="card-body">
+                        <span data-i18n="tag.food">Restaurant</span>
+                        <h3>Grill Master</h3>
+                        <a href="https://qweb-designs.github.io/Grill-Master-/" target="_blank" class="card-link" data-i18n="link">Open Project</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800');"></div>
+                    <div class="card-body">
+                        <span data-i18n="tag.agency">Business Agency</span>
+                        <h3>Qweb Official</h3>
+                        <a href="https://qweb-designs.github.io/Qweb/" target="_blank" class="card-link" data-i18n="link">Open Project</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="portfolio-grid">
-          <div class="project-card">
-            <div class="card-thumb">
-              <img src="https://images.unsplash.com/photo-1561181286-d5ef13ed6a63?q=80&w=800" alt="Store">
-            </div>
-            <div class="card-info">
-              <span data-i18n="p1.tag">E-Commerce</span>
-              <h3>Qusai Store</h3>
-              <a href="https://qweb-designs.github.io/Qusai-store/" target="_blank" class="view-btn" data-i18n="view_project">View Live Project</a>
-            </div>
-          </div>
-          <div class="project-card">
-            <div class="card-thumb">
-              <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800" alt="Grill">
-            </div>
-            <div class="card-info">
-              <span data-i18n="p2.tag">Restaurant</span>
-              <h3>Grill Master</h3>
-              <a href="https://qweb-designs.github.io/Grill-Master-/" target="_blank" class="view-btn" data-i18n="view_project">View Live Project</a>
-            </div>
-          </div>
-          <div class="project-card">
-            <div class="card-thumb">
-              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800" alt="Agency">
-            </div>
-            <div class="card-info">
-              <span data-i18n="p3.tag">Portfolio</span>
-              <h3>Qweb Agency</h3>
-              <a href="https://qweb-designs.github.io/Qweb/" target="_blank" class="view-btn" data-i18n="view_project">View Live Project</a>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <section id="contact" class="section-padding">
-      <div class="container contact-container">
-        <div class="contact-text">
-          <h2 data-i18n="contact.title">Let's build something <span class="accent-text">extraordinary</span> together.</h2>
-          <p data-i18n="contact.desc">Ready to elevate your brand? Contact me directly through any of these platforms.</p>
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="contact-flex">
+                <div class="contact-info">
+                    <h2 data-i18n="con.title">Let's build your <span class="accent">dream</span> site.</h2>
+                    <p data-i18n="con.sub">Reach out today for a consultation and high-quality web service.</p>
+                </div>
+                <div class="contact-grid">
+                    <div class="c-box">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <h4 data-i18n="c.wa">WhatsApp</h4>
+                        <a href="https://wa.me/962780576584" target="_blank">+962 780 576 584</a>
+                    </div>
+                    <div class="c-box">
+                        <i class="fa-solid fa-envelope"></i>
+                        <h4 data-i18n="c.mail">Email</h4>
+                        <a href="mailto:qoseesa1300@gmail.com">qoseesa1300@gmail.com</a>
+                    </div>
+                    <div class="c-box">
+                        <i class="fa-brands fa-instagram"></i>
+                        <h4 data-i18n="c.ig">Instagram</h4>
+                        <a href="https://www.instagram.com/u.i_78?igsh=MW41eWxlMHQ5ZmN4cw==" target="_blank">@u.i_78</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="contact-cards">
-          <div class="c-card">
-            <i class="fa-brands fa-whatsapp"></i>
-            <h4>WhatsApp</h4>
-            <p data-i18n="c1.p">Instant communication</p>
-            <a href="https://wa.me/962780576584" target="_blank">+962 780 576 584</a>
-          </div>
-          <div class="c-card">
-            <i class="fa-brands fa-instagram"></i>
-            <h4>Instagram</h4>
-            <p data-i18n="c2.p">Follow the design journey</p>
-            <a href="https://www.instagram.com/u.i_78?igsh=MW41eWxlMHQ5ZmN4cw==" target="_blank">@u.i_78</a>
-          </div>
-        </div>
-      </div>
     </section>
-  </main>
 
-  <footer>
-    <div class="container footer-content">
-      <p>© 2026 Qweb Designs. All Rights Reserved. Crafted by Qusai.</p>
-    </div>
-  </footer>
+    <footer>
+        <p>© 2026 Qweb Designs. All rights reserved by Qusai.</p>
+    </footer>
 
-  <script>
-    const translations = {
-      en: {
-        "nav.home": "Home", "nav.portfolio": "Projects", "nav.contact": "Contact",
-        "hero.badge": "Professional Web Solutions",
-        "hero.title": "Crafting <span class='accent-text'>Luxury Digital</span> Experiences",
-        "hero.desc": "I build high-performance, custom landing pages from scratch. Focused on clean aesthetics and seamless user journeys for premium brands.",
-        "hero.cta1": "Explore Work", "hero.cta2": "Get a Quote",
-        "portfolio.title": "Selected Works", "portfolio.sub": "A showcase of premium design and clean code.",
-        "view_project": "View Live Project", "p1.tag": "E-Commerce", "p2.tag": "Restaurant", "p3.tag": "Portfolio",
-        "contact.title": "Let's build something <span class='accent-text'>extraordinary</span> together.",
-        "contact.desc": "Ready to elevate your brand? Contact me directly through any of these platforms.",
-        "c1.p": "Instant communication", "c2.p": "Follow the design journey"
-      },
-      ar: {
-        "nav.home": "الرئيسية", "nav.portfolio": "مشاريعي", "nav.contact": "تواصل معي",
-        "hero.badge": "حلول ويب احترافية",
-        "hero.title": "نصنع <span class='accent-text'>تجارب رقمية</span> فاخرة",
-        "hero.desc": "أقوم ببناء صفحات هبوط مخصصة وعالية الأداء من الصفر. أركز على الجماليات النظيفة ورحلة المستخدم السلسة للعلامات التجارية المميزة.",
-        "hero.cta1": "استعرض أعمالي", "hero.cta2": "احصل على عرض سعر",
-        "portfolio.title": "أعمال مختارة", "portfolio.sub": "واجهة لعرض التصاميم الفاخرة والكود النظيف.",
-        "view_project": "مشاهدة المشروع المباشر", "p1.tag": "تجارة إلكترونية", "p2.tag": "مطاعم", "p3.tag": "معرض أعمال",
-        "contact.title": "لنقم ببناء شيء <span class='accent-text'>استثنائي</span> معاً.",
-        "contact.desc": "هل أنت جاهز لرفع مستوى علامتك التجارية؟ تواصل معي مباشرة عبر أي من هذه المنصات.",
-        "c1.p": "تواصل فوري", "c2.p": "تابع رحلة التصميم"
-      }
-    };
+    <script>
+        const translations = {
+            en: {
+                "nav.home": "Home", "nav.portfolio": "Portfolio", "nav.contact": "Contact",
+                "hero.badge": "Qweb Designs · by Qusai",
+                "hero.title": "Crafting <span class='accent'>Luxury Digital</span> Experiences",
+                "hero.desc": "I build high-performance, custom landing pages from scratch. Focused on clean aesthetics and premium user journeys.",
+                "hero.btn1": "View My Work", "hero.btn2": "Get a Quote",
+                "port.title": "Recent Projects", "port.sub": "Showcasing premium web design and development.",
+                "tag.store": "E-Commerce", "tag.food": "Restaurant", "tag.agency": "Business Agency",
+                "link": "Open Project",
+                "con.title": "Let's build your <span class='accent'>dream</span> site.",
+                "con.sub": "Reach out today for a consultation and high-quality web service.",
+                "c.wa": "WhatsApp", "c.mail": "Email", "c.ig": "Instagram"
+            },
+            ar: {
+                "nav.home": "الرئيسية", "nav.portfolio": "الأعمال", "nav.contact": "تواصل معي",
+                "hero.badge": "Qweb Designs · قُصي",
+                "hero.title": "نصنع <span class='accent'>تجارب رقمية</span> فاخرة",
+                "hero.desc": "أقوم ببناء صفحات هبوط مخصصة وعالية الأداء من الصفر. أركز على الجماليات النظيفة ورحلة المستخدم السلسة.",
+                "hero.btn1": "شاهد أعمالي", "hero.btn2": "اطلب عرض سعر",
+                "port.title": "مشاريع حديثة", "port.sub": "عرض لتصاميم المواقع المتميزة وجودة البرمجة.",
+                "tag.store": "تجارة إلكترونية", "tag.food": "مطاعم", "tag.agency": "وكالة أعمال",
+                "link": "افتح المشروع",
+                "con.title": "لنصمم موقع <span class='accent'>أحلامك</span> معاً.",
+                "con.sub": "تواصل معي اليوم للحصول على استشارة وخدمة ويب عالية الجودة.",
+                "c.wa": "واتساب", "c.mail": "البريد الإلكتروني", "c.ig": "إنستغرام"
+            }
+        };
 
-    let currentLang = 'en';
-    const langSwitcher = document.getElementById('langSwitcher');
+        let currentLang = 'en';
+        const langBtn = document.getElementById('langBtn');
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
 
-    function updateLanguage(lang) {
-      currentLang = lang;
-      document.body.classList.toggle('rtl', lang === 'ar');
-      langSwitcher.textContent = lang === 'en' ? 'AR' : 'EN';
-      
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        el.innerHTML = translations[lang][key];
-      });
-      
-      // Update Hero specifically to handle the span
-      document.getElementById('heroTitle').innerHTML = translations[lang]["hero.title"];
-      document.getElementById('heroDesc').textContent = translations[lang]["hero.desc"];
-    }
+        // تبديل اللغة
+        function switchLang(lang) {
+            currentLang = lang;
+            document.body.classList.toggle('rtl', lang === 'ar');
+            langBtn.textContent = lang === 'en' ? 'AR' : 'EN';
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.innerHTML = translations[lang][key];
+            });
+            // تحديث العنوان والوصف بشكل خاص
+            document.getElementById('heroTitle').innerHTML = translations[lang]["hero.title"];
+            document.getElementById('heroDesc').textContent = translations[lang]["hero.desc"];
+        }
 
-    langSwitcher.addEventListener('click', () => updateLanguage(currentLang === 'en' ? 'ar' : 'en'));
+        langBtn.addEventListener('click', () => switchLang(currentLang === 'en' ? 'ar' : 'en'));
 
-    // Navbar Scroll Effect
-    window.addEventListener('scroll', () => {
-      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-    });
+        // تشغيل قائمة الجوال (الثلاث خطوط)
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+        });
 
-    updateLanguage('en');
-  </script>
+        // تأثير السكرول للهيدر
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // تهيئة الموقع
+        switchLang('en');
+    </script>
 </body>
 </html>
