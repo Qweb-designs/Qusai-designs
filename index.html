@@ -2,346 +2,159 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Qweb Designs | Luxury Web Solutions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qweb Designs | Professional Portfolio</title>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- الأساسيات والسمات --- */
         :root {
-            --bg-dark: #0c0c0c;
-            --bg-surface: #141414;
+            --bg: #0c0c0c;
+            --surface: #141414;
             --accent: #ff4d00;
-            --accent-glow: rgba(255, 77, 0, 0.3);
-            --text-main: #ffffff;
-            --text-dim: #999;
-            --font-en: 'Poppins', sans-serif;
-            --font-ar: 'Cairo', sans-serif;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --text: #ffffff;
+            --dim: #999;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { background-color: var(--bg-dark); color: var(--text-main); font-family: var(--font-en); line-height: 1.6; overflow-x: hidden; }
-        body.rtl { direction: rtl; font-family: var(--font-ar); }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: var(--bg); color: var(--text); overflow-x: hidden; scroll-behavior: smooth; }
+        body.rtl { direction: rtl; font-family: 'Cairo', sans-serif; }
+        
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .accent { color: var(--accent); }
 
-        /* --- الهيدر (Navbar) --- */
-        #navbar {
-            position: fixed;
-            top: 0; width: 100%;
-            padding: 20px 0;
-            z-index: 2000;
-            transition: var(--transition);
+        /* Navigation */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 20px 0;
+            z-index: 1000; transition: 0.3s; background: rgba(12,12,12,0.8);
+            backdrop-filter: blur(10px); border-bottom: 1px solid #222;
         }
-        #navbar.scrolled {
-            background: rgba(12, 12, 12, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 12px 0;
-            border-bottom: 1px solid #222;
-        }
-
         .nav-flex { display: flex; align-items: center; justify-content: space-between; }
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; }
         
-        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        /* تم إصلاح رابط اللوغو ليقرأ الصورة المرفوعة */
-        .logo img { width: 45px; height: 45px; border-radius: 8px; border: 1px solid #333; }
-        .logo span { font-size: 1.5rem; font-weight: 800; color: #fff; }
-
+        /* إصلاح اللوغو: نستخدم اسم الملف الذي أرفقته */
+        .logo img { width: 40px; height: 40px; border-radius: 5px; object-fit: cover; }
+        
         .nav-links { display: flex; list-style: none; gap: 30px; }
-        .nav-links a { color: #fff; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
+        .nav-links a { color: #fff; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
         .nav-links a:hover { color: var(--accent); }
 
-        .nav-btns { display: flex; align-items: center; gap: 15px; }
-        .lang-btn {
-            background: var(--bg-surface);
-            border: 1px solid #333;
-            color: #fff;
-            padding: 6px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 0.8rem;
-        }
+        .menu-btn { display: none; font-size: 1.5rem; cursor: pointer; }
 
-        /* القائمة الجوال */
-        .menu-btn { display: none; font-size: 1.5rem; color: #fff; cursor: pointer; }
-
+        /* القائمة الجانبية للجوال */
         @media (max-width: 992px) {
             .nav-links {
-                position: fixed;
-                top: 0; right: -100%;
-                width: 70%; height: 100vh;
-                background: var(--bg-surface);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                transition: 0.4s;
-                z-index: 1000;
+                position: fixed; top: 0; right: -100%; width: 250px; height: 100vh;
+                background: var(--surface); flex-direction: column; align-items: center;
+                justify-content: center; transition: 0.4s ease-in-out;
             }
             .nav-links.active { right: 0; }
-            .menu-btn { display: block; }
-            body.rtl .nav-links { right: auto; left: -100%; }
-            body.rtl .nav-links.active { left: 0; }
+            .menu-btn { display: block; z-index: 1100; }
         }
 
-        /* --- البطل (Hero) --- */
-        #hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            background: radial-gradient(circle at 80% 20%, rgba(255, 77, 0, 0.05), transparent);
-        }
-        .hero-content { max-width: 800px; }
-        .hero-badge {
-            background: rgba(255, 77, 0, 0.1);
-            color: var(--accent);
-            padding: 6px 16px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-        .hero-content h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; margin-bottom: 25px; font-weight: 800; }
-        .hero-content p { font-size: 1.2rem; color: var(--text-dim); margin-bottom: 35px; max-width: 600px; }
+        /* Hero Section */
+        #hero { height: 100vh; display: flex; align-items: center; }
+        .hero-text h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
+        .hero-text p { color: var(--dim); font-size: 1.1rem; max-width: 600px; margin-bottom: 30px; }
         
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-        .btn-main { background: var(--accent); color: #fff; }
-        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 10px 20px var(--accent-glow); }
-        .btn-sec { border: 2px solid #333; color: #fff; margin-left: 15px; }
-        body.rtl .btn-sec { margin-left: 0; margin-right: 15px; }
+        .btns { display: flex; gap: 15px; }
+        .btn { padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .btn-p { background: var(--accent); color: #fff; }
+        .btn-p:hover { box-shadow: 0 5px 15px rgba(255, 77, 0, 0.4); }
 
-        /* --- معرض الأعمال (Portfolio) --- */
+        /* Portfolio */
         .section { padding: 100px 0; }
-        .section-head { text-align: center; margin-bottom: 60px; }
-        .section-head h2 { font-size: 2.5rem; margin-bottom: 10px; }
-        
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
-        .card {
-            background: var(--bg-surface);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid #222;
-            transition: var(--transition);
-        }
-        .card:hover { transform: translateY(-10px); border-color: var(--accent); }
-        
-        .card-img { height: 240px; background-size: cover; background-position: center; transition: 0.5s; }
-        .card:hover .card-img { transform: scale(1.05); }
-        
-        .card-body { padding: 25px; }
-        .card-body span { color: var(--accent); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; }
-        .card-body h3 { margin: 10px 0 15px; font-size: 1.5rem; }
-        .card-link { color: #fff; text-decoration: none; font-weight: 600; border-bottom: 2px solid var(--accent); padding-bottom: 4px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 40px; }
+        .card { background: var(--surface); border-radius: 15px; overflow: hidden; border: 1px solid #222; }
+        .card-img { height: 200px; background: #222 url('https://via.placeholder.com/400x200?text=Project+Preview') center/cover; }
+        /* تم وضع صورة افتراضية للمتجر */
+        .store-img { background-image: url('https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=500'); }
+        .card-content { padding: 20px; }
+        .card-content h3 { margin-bottom: 10px; }
+        .card-content a { color: var(--accent); text-decoration: none; font-weight: 600; }
 
-        /* --- التواصل (Contact) --- */
-        #contact { background: #0a0a0a; }
-        .contact-flex { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
-        .contact-info h2 { font-size: 3rem; margin-bottom: 20px; }
-        
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .c-box { background: var(--bg-surface); padding: 25px; border-radius: 15px; border: 1px solid #222; }
-        .c-box i { font-size: 1.8rem; color: var(--accent); margin-bottom: 15px; }
-        .c-box a { color: #fff; text-decoration: none; font-weight: 700; word-break: break-all; }
-
-        footer { text-align: center; padding: 40px; color: #444; border-top: 1px solid #111; }
-
-        @media (max-width: 768px) {
-            .contact-flex { grid-template-columns: 1fr; text-align: center; }
-            .contact-grid { grid-template-columns: 1fr; }
-            .btn-sec { margin: 10px 0 0 0; width: 100%; justify-content: center; }
-            .btn-main { width: 100%; justify-content: center; }
-        }
+        /* Contact */
+        .contact-box { background: var(--surface); padding: 40px; border-radius: 20px; text-align: center; }
+        .contact-links { display: flex; justify-content: center; gap: 30px; margin-top: 20px; flex-wrap: wrap; }
+        .contact-links a { color: #fff; text-decoration: none; font-size: 1.2rem; }
+        .contact-links i { color: var(--accent); margin-right: 8px; }
     </style>
 </head>
 <body>
 
-    <nav id="navbar">
+    <nav>
         <div class="container nav-flex">
             <a href="#" class="logo">
-                <img src="https://i.ibb.co/Lzy0M09m/1000031794.png" alt="Qweb Logo">
+                <img src="1000031794.png" alt="Qweb Logo">
                 <span>Qweb<span class="accent">.</span></span>
             </a>
-            
             <ul class="nav-links" id="navLinks">
-                <li><a href="#hero" data-i18n="nav.home">Home</a></li>
-                <li><a href="#portfolio" data-i18n="nav.portfolio">Projects</a></li>
-                <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+                <li><a href="#hero" onclick="closeMenu()">Home</a></li>
+                <li><a href="#portfolio" onclick="closeMenu()">Portfolio</a></li>
+                <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
             </ul>
-
-            <div class="nav-btns">
-                <button class="lang-btn" id="langBtn">AR</button>
-                <div class="menu-btn" id="menuToggle"><i class="fa-solid fa-bars"></i></div>
+            <div class="menu-btn" id="menuBtn">
+                <i class="fa-solid fa-bars"></i>
             </div>
         </div>
     </nav>
 
     <section id="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-badge" data-i18n="hero.badge">Qweb Designs · by Qusai</div>
-                <h1 id="heroTitle">Crafting <span class="accent">Luxury Digital</span> Experiences</h1>
-                <p id="heroDesc">I build high-performance, custom landing pages from scratch. Focused on clean aesthetics and premium user journeys.</p>
-                <div class="hero-actions">
-                    <a href="#portfolio" class="btn btn-main" data-i18n="hero.btn1">View My Work</a>
-                    <a href="https://wa.me/962780576584" class="btn btn-sec" data-i18n="hero.btn2">Get a Quote</a>
-                </div>
+        <div class="container hero-text">
+            <h1>Crafting <span class="accent">Luxury Digital</span> Experiences</h1>
+            <p>I build high-performance, custom landing pages from scratch. Focused on clean aesthetics and premium user journeys.</p>
+            <div class="btns">
+                <a href="#portfolio" class="btn btn-p">View My Work</a>
+                <a href="https://wa.me/962780576584" class="btn" style="border: 1px solid #333; color: #fff;">Get a Quote</a>
             </div>
         </div>
     </section>
 
     <section id="portfolio" class="section">
         <div class="container">
-            <div class="section-head">
-                <h2 data-i18n="port.title">Recent Projects</h2>
-                <p data-i18n="port.sub">Showcasing premium web design and development.</p>
-            </div>
-
+            <h2>Recent <span class="accent">Projects</span></h2>
             <div class="grid">
                 <div class="card">
-                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=800');"></div>
-                    <div class="card-body">
-                        <span data-i18n="tag.store">E-Commerce</span>
+                    <div class="card-img store-img"></div>
+                    <div class="card-content">
                         <h3>Qusai Store</h3>
-                        <a href="https://qweb-designs.github.io/Qusai-store/" target="_blank" class="card-link" data-i18n="link">Open Project</a>
+                        <a href="https://qweb-designs.github.io/Qusai-store/" target="_blank">View Project <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     </div>
                 </div>
-
-                <div class="card">
-                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=800');"></div>
-                    <div class="card-body">
-                        <span data-i18n="tag.food">Restaurant</span>
-                        <h3>Grill Master</h3>
-                        <a href="https://qweb-designs.github.io/Grill-Master-/" target="_blank" class="card-link" data-i18n="link">Open Project</a>
-                    </div>
                 </div>
-
-                <div class="card">
-                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800');"></div>
-                    <div class="card-body">
-                        <span data-i18n="tag.agency">Business Agency</span>
-                        <h3>Qweb Official</h3>
-                        <a href="https://qweb-designs.github.io/Qweb/" target="_blank" class="card-link" data-i18n="link">Open Project</a>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
     <section id="contact" class="section">
         <div class="container">
-            <div class="contact-flex">
-                <div class="contact-info">
-                    <h2 data-i18n="con.title">Let's build your <span class="accent">dream</span> site.</h2>
-                    <p data-i18n="con.sub">Reach out today for a consultation and high-quality web service.</p>
-                </div>
-                <div class="contact-grid">
-                    <div class="c-box">
-                        <i class="fa-brands fa-whatsapp"></i>
-                        <h4 data-i18n="c.wa">WhatsApp</h4>
-                        <a href="https://wa.me/962780576584" target="_blank">+962 780 576 584</a>
-                    </div>
-                    <div class="c-box">
-                        <i class="fa-solid fa-envelope"></i>
-                        <h4 data-i18n="c.mail">Email</h4>
-                        <a href="mailto:qoseesa1300@gmail.com">qoseesa1300@gmail.com</a>
-                    </div>
-                    <div class="c-box">
-                        <i class="fa-brands fa-instagram"></i>
-                        <h4 data-i18n="c.ig">Instagram</h4>
-                        <a href="https://www.instagram.com/u.i_78?igsh=MW41eWxlMHQ5ZmN4cw==" target="_blank">@u.i_78</a>
-                    </div>
+            <div class="contact-box">
+                <h2>Let's build your <span class="accent">dream</span> site.</h2>
+                <div class="contact-links">
+                    <a href="https://wa.me/962780576584"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                    <a href="mailto:qoseesa1300@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a>
+                    <a href="https://www.instagram.com/u.i_78"><i class="fa-brands fa-instagram"></i> Instagram</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer>
-        <p>© 2026 Qweb Designs. All rights reserved by Qusai.</p>
-    </footer>
-
     <script>
-        const translations = {
-            en: {
-                "nav.home": "Home", "nav.portfolio": "Portfolio", "nav.contact": "Contact",
-                "hero.badge": "Qweb Designs · by Qusai",
-                "hero.title": "Crafting <span class='accent'>Luxury Digital</span> Experiences",
-                "hero.desc": "I build high-performance, custom landing pages from scratch. Focused on clean aesthetics and premium user journeys.",
-                "hero.btn1": "View My Work", "hero.btn2": "Get a Quote",
-                "port.title": "Recent Projects", "port.sub": "Showcasing premium web design and development.",
-                "tag.store": "E-Commerce", "tag.food": "Restaurant", "tag.agency": "Business Agency",
-                "link": "Open Project",
-                "con.title": "Let's build your <span class='accent'>dream</span> site.",
-                "con.sub": "Reach out today for a consultation and high-quality web service.",
-                "c.wa": "WhatsApp", "c.mail": "Email", "c.ig": "Instagram"
-            },
-            ar: {
-                "nav.home": "الرئيسية", "nav.portfolio": "الأعمال", "nav.contact": "تواصل معي",
-                "hero.badge": "Qweb Designs · قُصي",
-                "hero.title": "نصنع <span class='accent'>تجارب رقمية</span> فاخرة",
-                "hero.desc": "أقوم ببناء صفحات هبوط مخصصة وعالية الأداء من الصفر. أركز على الجماليات النظيفة ورحلة المستخدم السلسة.",
-                "hero.btn1": "شاهد أعمالي", "hero.btn2": "اطلب عرض سعر",
-                "port.title": "مشاريع حديثة", "port.sub": "عرض لتصاميم المواقع المتميزة وجودة البرمجة.",
-                "tag.store": "تجارة إلكترونية", "tag.food": "مطاعم", "tag.agency": "وكالة أعمال",
-                "link": "افتح المشروع",
-                "con.title": "لنصمم موقع <span class='accent'>أحلامك</span> معاً.",
-                "con.sub": "تواصل معي اليوم للحصول على استشارة وخدمة ويب عالية الجودة.",
-                "c.wa": "واتساب", "c.mail": "البريد الإلكتروني", "c.ig": "إنستغرام"
-            }
-        };
-
-        let currentLang = 'en';
-        const langBtn = document.getElementById('langBtn');
-        const menuToggle = document.getElementById('menuToggle');
+        const menuBtn = document.getElementById('menuBtn');
         const navLinks = document.getElementById('navLinks');
 
-        // تبديل اللغة
-        function switchLang(lang) {
-            currentLang = lang;
-            document.body.classList.toggle('rtl', lang === 'ar');
-            langBtn.textContent = lang === 'en' ? 'AR' : 'EN';
-            
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                el.innerHTML = translations[lang][key];
-            });
-            // تحديث العنوان والوصف بشكل خاص
-            document.getElementById('heroTitle').innerHTML = translations[lang]["hero.title"];
-            document.getElementById('heroDesc').textContent = translations[lang]["hero.desc"];
-        }
-
-        langBtn.addEventListener('click', () => switchLang(currentLang === 'en' ? 'ar' : 'en'));
-
-        // تشغيل قائمة الجوال (الثلاث خطوط)
-        menuToggle.addEventListener('click', () => {
+        // فتح وإغلاق القائمة
+        menuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            menuToggle.innerHTML = navLinks.classList.contains('active') ? 
+            menuBtn.innerHTML = navLinks.classList.contains('active') ? 
                 '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
         });
 
-        // تأثير السكرول للهيدر
-        window.addEventListener('scroll', () => {
-            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-        });
-
-        // تهيئة الموقع
-        switchLang('en');
+        // وظيفة لإغلاق القائمة عند الضغط على خيار
+        function closeMenu() {
+            navLinks.classList.remove('active');
+            menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+        }
     </script>
 </body>
 </html>
