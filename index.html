@@ -1,177 +1,827 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qweb Designs | High-End Web Solutions</title>
-    
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Qweb Designs | High-End Landing Pages</title>
+  <!-- Google Fonts: Poppins for English, Cairo for Arabic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-dark: #0c0c0c;
+      --text-light: #ffffff;
+      --accent: #ff4d00;
+      --surface: #1a1a1a;
+      --transition: 0.3s ease;
+      --font-en: 'Poppins', sans-serif;
+      --font-ar: 'Cairo', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      font-family: var(--font-en);
+      transition: background-color 0.2s;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* RTL overrides */
+    body.rtl {
+      direction: rtl;
+      font-family: var(--font-ar);
+    }
+
+    body.rtl .nav-links {
+      flex-direction: row-reverse;
+    }
+
+    body.rtl .hero-cta {
+      flex-direction: row-reverse;
+    }
+
+    body.rtl .card-content {
+      text-align: right;
+    }
+
+    body.rtl .service-item {
+      border-left: none;
+      border-right: 4px solid var(--accent);
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ---------- NAVBAR ---------- */
+    #navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+      background: transparent;
+      transition: background 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
+      padding: 1.2rem 0;
+    }
+
+    #navbar.scrolled {
+      background: rgba(12, 12, 12, 0.95);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+      padding: 0.8rem 0;
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Custom Logo */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: var(--text-light);
+      letter-spacing: -0.5px;
+    }
+
+    .logo-icon {
+      position: relative;
+      width: 42px;
+      height: 42px;
+      background: var(--accent);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: white;
+      transform: rotate(-5deg);
+      transition: transform 0.3s;
+    }
+
+    .logo:hover .logo-icon {
+      transform: rotate(0deg) scale(1.05);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .logo-text .brand {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .logo-text .brand span {
+      color: var(--accent);
+    }
+
+    .logo-text .tagline {
+      font-size: 0.6rem;
+      font-weight: 400;
+      color: #888;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color var(--transition);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+      transition: width var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .lang-toggle {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: var(--text-light);
+      padding: 0.5rem 1.2rem;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      margin-left: 1rem;
+      background: rgba(255,255,255,0.05);
+    }
+
+    body.rtl .lang-toggle {
+      margin-left: 0;
+      margin-right: 1rem;
+    }
+
+    .lang-toggle:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+      margin-left: 0.5rem;
+    }
+
+    /* ---------- HERO ---------- */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 8rem 0 4rem;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255, 77, 0, 0.15);
+      color: var(--accent);
+      padding: 0.5rem 1.4rem;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-size: clamp(2.8rem, 7vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-highlight {
+      color: var(--accent);
+    }
+
+    .hero-description {
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      font-weight: 300;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 2.4rem;
+      border-radius: 40px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all var(--transition);
+      font-size: 1rem;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      border: 2px solid var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--accent);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255,255,255,0.5);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ---------- PORTFOLIO ---------- */
+    #portfolio {
+      padding: 6rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-sub {
+      color: rgba(255,255,255,0.6);
+      font-weight: 300;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      border: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 24px 40px rgba(255, 77, 0, 0.2);
+      border-color: rgba(255, 77, 0, 0.3);
+    }
+
+    .card-img {
+      height: 220px;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.5s;
+    }
+
+    .project-card:hover .card-img {
+      transform: scale(1.04);
+    }
+
+    .card-content {
+      padding: 1.8rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-tag {
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .card-link {
+      margin-top: auto;
+      align-self: flex-start;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 4px;
+      transition: gap 0.3s, color 0.3s;
+    }
+
+    body.rtl .card-link {
+      align-self: flex-start;
+    }
+
+    .card-link:hover {
+      gap: 0.8rem;
+      color: var(--accent);
+    }
+
+    /* ---------- SERVICES ---------- */
+    #services {
+      padding: 6rem 0;
+      background: #0a0a0a;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .service-item {
+      background: var(--surface);
+      padding: 2.2rem;
+      border-radius: 20px;
+      border-left: 4px solid var(--accent);
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .service-item:hover {
+      background: #222;
+      transform: translateY(-5px);
+    }
+
+    .service-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .service-name {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 0.7rem;
+    }
+
+    /* ---------- CONTACT ---------- */
+    #contact {
+      padding: 6rem 0;
+    }
+
+    .contact-methods {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .contact-card {
+      background: var(--surface);
+      padding: 2rem 2.5rem;
+      border-radius: 20px;
+      text-align: center;
+      min-width: 220px;
+      transition: 0.3s;
+      border: 1px solid transparent;
+      text-decoration: none;
+      color: white;
+      display: block;
+    }
+
+    .contact-card:hover {
+      border-color: var(--accent);
+      background: #1e1e1e;
+      transform: translateY(-5px);
+    }
+
+    .contact-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-label {
+      font-weight: 300;
+      color: #aaa;
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-value {
+      font-weight: 600;
+      font-size: 1.1rem;
+      word-break: break-word;
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      text-align: center;
+      padding: 2.5rem;
+      color: #555;
+      border-top: 1px solid #222;
+      font-size: 0.9rem;
+    }
+
+    /* Fade-in animation */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #0c0c0c;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        padding: 2rem;
+        gap: 1.5rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .contact-methods {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
 </head>
 <body>
-
-    <nav id="navbar">
-        <div class="container nav-flex">
-            <a href="#" class="logo">
-                <img src="1000031794.png" alt="Qweb Logo">
-                <div class="logo-text">Qweb<span>.</span></div>
-            </a>
-            
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home" onclick="closeMenu()">Home</a></li>
-                <li><a href="#services" onclick="closeMenu()">Services</a></li>
-                <li><a href="#portfolio" onclick="closeMenu()">Portfolio</a></li>
-                <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
-            </ul>
-
-            <div class="nav-extra">
-                <button id="langBtn" class="lang-toggle">AR</button>
-                <div class="menu-icon" id="menuBtn">
-                    <i class="fa-solid fa-bars-staggered"></i>
-                </div>
-            </div>
+  <nav id="navbar">
+    <div class="nav-container">
+      <!-- Logo Designed -->
+      <a href="#" class="logo">
+        <div class="logo-icon">Q</div>
+        <div class="logo-text">
+          <span class="brand">Qweb<span>.</span>Designs</span>
+          <span class="tagline">Luxury Web</span>
         </div>
-    </nav>
+      </a>
 
-    <section id="home" class="hero-section">
-        <div class="container">
-            <div class="hero-content">
-                <div class="badge">Innovation & Design</div>
-                <h1>Crafting <span class="accent-gradient">Luxury Digital</span> Experiences</h1>
-                <p>We build high-performance, custom landing pages and complex web systems from scratch. Focused on clean aesthetics, speed, and premium user journeys.</p>
-                <div class="hero-btns">
-                    <a href="#portfolio" class="btn btn-primary">Explore Projects</a>
-                    <a href="https://wa.me/962780576584" class="btn btn-outline">Start a Project</a>
-                </div>
-            </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero" data-i18n="nav.home">Home</a></li>
+        <li><a href="#portfolio" data-i18n="nav.portfolio">Portfolio</a></li>
+        <li><a href="#services" data-i18n="nav.services">Services</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <div style="display: flex; align-items: center;">
+        <button id="langSwitch" class="lang-toggle">AR</button>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section id="hero">
+      <div class="container hero-content fade-up">
+        <div class="hero-badge" data-i18n="hero.badge">Qweb Designs · by Qusai</div>
+        <h1 class="hero-title">
+          <span data-i18n="hero.line1">Crafting</span> <span class="hero-highlight" data-i18n="hero.line2">Luxury Digital</span><br>
+          <span data-i18n="hero.line3">Experiences</span>
+        </h1>
+        <p class="hero-description" data-i18n="hero.desc">
+          I specialize in building custom, high-performance Landing Pages from scratch using HTML, CSS, and JS. I focus on creating luxury digital experiences for businesses looking for clean and impactful designs.
+        </p>
+        <div class="hero-cta">
+          <a href="#portfolio" class="btn btn-primary" data-i18n="hero.cta1">View Work</a>
+          <a href="#contact" class="btn btn-outline" data-i18n="hero.cta2">Get in Touch</a>
         </div>
-        <div class="hero-overlay"></div>
+      </div>
     </section>
 
-    <section id="services" class="services-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Our Expertise</h2>
-                <div class="line"></div>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <i class="fa-solid fa-code"></i>
-                    <h3>Web Development</h3>
-                    <p>Clean, maintainable, and scalable code using the latest technologies.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    <h3>UI/UX Design</h3>
-                    <p>Creating intuitive interfaces that provide seamless user experiences.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fa-solid fa-rocket"></i>
-                    <h3>Optimization</h3>
-                    <p>Ensuring your website loads lightning fast on all devices.</p>
-                </div>
-            </div>
+    <section id="portfolio">
+      <div class="container">
+        <div class="section-header fade-up">
+          <h2 class="section-title" data-i18n="portfolio.title">Selected Projects</h2>
+          <p class="section-sub" data-i18n="portfolio.sub">High-quality craftsmanship, no shortcuts.</p>
         </div>
+        <div class="portfolio-grid">
+          <!-- Project 1: Updated Link to Qusai Store -->
+          <div class="project-card fade-up">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1607082349566-187342175e2f?q=80&w=1000&auto=format&fit=crop');"></div>
+            <div class="card-content">
+              <span class="card-tag">E-Commerce Store</span>
+              <h3 class="card-title">Qusai Store</h3>
+              <a href="https://qweb-designs.github.io/Qusai-store/#about" target="_blank" class="card-link">Explore Project →</a>
+            </div>
+          </div>
+          <!-- Project 2: Grill Master -->
+          <div class="project-card fade-up">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=1000&auto=format&fit=crop');"></div>
+            <div class="card-content">
+              <span class="card-tag">Premium Steakhouse</span>
+              <h3 class="card-title">Grill Master</h3>
+              <a href="https://qweb-designs.github.io/Grill-Master-/" target="_blank" class="card-link">Explore Project →</a>
+            </div>
+          </div>
+          <!-- Project 3: Agency Concept -->
+          <div class="project-card fade-up">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1558655146-9f40138edfeb?q=80&w=1000&auto=format&fit=crop');"></div>
+            <div class="card-content">
+              <span class="card-tag">Agency Concept</span>
+              <h3 class="card-title">Qweb Agency</h3>
+              <a href="https://qweb-designs.github.io/Qweb/" target="_blank" class="card-link">Explore Project →</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="portfolio" class="portfolio-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Featured Projects</h2>
-                <p>A glimpse into our recent successful launches.</p>
-            </div>
-            
-            <div class="portfolio-grid">
-                <div class="project-card">
-                    <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=800');"></div>
-                    <div class="project-info">
-                        <span>E-Commerce</span>
-                        <h3>Qusai Store</h3>
-                        <p>A fully responsive modern store design.</p>
-                        <a href="https://qweb-designs.github.io/Qusai-store/" target="_blank">View Live <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=800');"></div>
-                    <div class="project-info">
-                        <span>Dining</span>
-                        <h3>Grill Master</h3>
-                        <p>Elegant restaurant landing page for premium dining.</p>
-                        <a href="https://qweb-designs.github.io/Grill-Master-/" target="_blank">View Live <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800');"></div>
-                    <div class="project-info">
-                        <span>Agency</span>
-                        <h3>Qweb Official</h3>
-                        <p>The official hub for all Qweb design projects.</p>
-                        <a href="https://qweb-designs.github.io/Qweb/" target="_blank">View Live <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                    </div>
-                </div>
-            </div>
+    <section id="services">
+      <div class="container">
+        <div class="section-header fade-up">
+          <h2 class="section-title" data-i18n="services.title">What I Offer</h2>
+          <p class="section-sub" data-i18n="services.sub">Modern solutions for premium brands.</p>
         </div>
+        <div class="services-grid">
+          <div class="service-item fade-up">
+            <div class="service-icon">🎯</div>
+            <h3 class="service-name" data-i18n="services.s1">Custom Landing Pages</h3>
+            <p data-i18n="services.s1d">Hand-coded, pixel-perfect pages tailored to your brand identity.</p>
+          </div>
+          <div class="service-item fade-up">
+            <div class="service-icon">📱</div>
+            <h3 class="service-name" data-i18n="services.s2">Responsive Design</h3>
+            <p data-i18n="services.s2d">Flawless performance on mobile, tablet, and desktop.</p>
+          </div>
+          <div class="service-item fade-up">
+            <div class="service-icon">✨</div>
+            <h3 class="service-name" data-i18n="services.s3">UI/UX Optimization</h3>
+            <p data-i18n="services.s3d">Smooth interactions and luxury aesthetics that convert.</p>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <div class="contact-wrapper">
-                <div class="contact-text">
-                    <h2>Let's build your <span class="accent">dream</span> site.</h2>
-                    <p>Have a vision? We have the tools to bring it to life. Reach out via any platform.</p>
-                </div>
-                <div class="contact-methods">
-                    <a href="https://wa.me/962780576584" class="method-card">
-                        <i class="fa-brands fa-whatsapp"></i>
-                        <span>WhatsApp</span>
-                    </a>
-                    <a href="mailto:qoseesa1300@gmail.com" class="method-card">
-                        <i class="fa-solid fa-envelope"></i>
-                        <span>Gmail</span>
-                    </a>
-                    <a href="https://www.instagram.com/u.i_78" class="method-card">
-                        <i class="fa-brands fa-instagram"></i>
-                        <span>Instagram</span>
-                    </a>
-                </div>
-            </div>
+    <section id="contact">
+      <div class="container">
+        <div class="section-header fade-up">
+          <h2 class="section-title" data-i18n="contact.title">Let's Talk</h2>
+          <p class="section-sub" data-i18n="contact.sub">Professional & direct communication.</p>
         </div>
+        <div class="contact-methods fade-up">
+          <!-- WhatsApp Direct -->
+          <a href="https://wa.me/962780576584" target="_blank" class="contact-card">
+            <div class="contact-icon">📞</div>
+            <div class="contact-label">WhatsApp</div>
+            <div class="contact-value">+962 780 576 584</div>
+          </a>
+          <!-- Instagram Direct -->
+          <a href="https://www.instagram.com/u.i_78?igsh=MW41eWxlMHQ5ZmN4cw==" target="_blank" class="contact-card">
+            <div class="contact-icon">📷</div>
+            <div class="contact-label">Instagram</div>
+            <div class="contact-value">@u.i_78</div>
+          </a>
+          <!-- Email Direct -->
+          <a href="mailto:qoseesa1300@gmail.com" class="contact-card">
+            <div class="contact-icon">✉️</div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">qoseesa1300@gmail.com</div>
+          </a>
+        </div>
+      </div>
     </section>
+  </main>
 
-    <footer>
-        <div class="container footer-content">
-            <p>&copy; 2026 Qweb Designs. All rights reserved by Qusai.</p>
-        </div>
-    </footer>
+  <footer>
+    <p>© 2025 Qweb Designs – High-Quality Craftsmanship</p>
+  </footer>
 
-    <script>
-        const menuBtn = document.getElementById('menuBtn');
-        const navLinks = document.getElementById('navLinks');
+  <script>
+    (function() {
+      // ----- LANGUAGE DATA -----
+      const translations = {
+        en: {
+          "nav.home": "Home",
+          "nav.portfolio": "Portfolio",
+          "nav.services": "Services",
+          "nav.contact": "Contact",
+          "hero.badge": "Qweb Designs · by Qusai",
+          "hero.line1": "Crafting",
+          "hero.line2": "Luxury Digital",
+          "hero.line3": "Experiences",
+          "hero.desc": "I specialize in building custom, high-performance Landing Pages from scratch using HTML, CSS, and JS. I focus on creating luxury digital experiences for businesses looking for clean and impactful designs.",
+          "hero.cta1": "View Work",
+          "hero.cta2": "Get in Touch",
+          "portfolio.title": "Selected Projects",
+          "portfolio.sub": "High-quality craftsmanship, no shortcuts.",
+          "services.title": "What I Offer",
+          "services.sub": "Modern solutions for premium brands.",
+          "services.s1": "Custom Landing Pages",
+          "services.s1d": "Hand-coded, pixel-perfect pages tailored to your brand identity.",
+          "services.s2": "Responsive Design",
+          "services.s2d": "Flawless performance on mobile, tablet, and desktop.",
+          "services.s3": "UI/UX Optimization",
+          "services.s3d": "Smooth interactions and luxury aesthetics that convert.",
+          "contact.title": "Let's Talk",
+          "contact.sub": "Professional & direct communication."
+        },
+        ar: {
+          "nav.home": "الرئيسية",
+          "nav.portfolio": "الأعمال",
+          "nav.services": "الخدمات",
+          "nav.contact": "تواصل",
+          "hero.badge": "Qweb Designs · قُصي",
+          "hero.line1": "نصنع",
+          "hero.line2": "تجارب رقمية",
+          "hero.line3": "فاخرة",
+          "hero.desc": "أختص ببناء صفحات هبوط مخصصة وعالية الأداء من الصفر باستخدام HTML و CSS و JS. أركز على خلق تجارب رقمية فاخرة للشركات الباحثة عن تصاميم نظيفة ومؤثرة.",
+          "hero.cta1": "شاهد الأعمال",
+          "hero.cta2": "تواصل معي",
+          "portfolio.title": "مشاريع مختارة",
+          "portfolio.sub": "جودة عالية في التصميم، بدون اختصارات.",
+          "services.title": "ما أقدمه",
+          "services.sub": "حلول عصرية للعلامات التجارية الفاخرة.",
+          "services.s1": "صفحات هبوط مخصصة",
+          "services.s1d": "صفحات مبنية يدويًا بدقة لتتناسب مع هوية علامتك.",
+          "services.s2": "تصميم متجاوب",
+          "services.s2d": "أداء مثالي على الجوال والجهاز اللوحي وسطح المكتب.",
+          "services.s3": "تحسين UI/UX",
+          "services.s3d": "تفاعلات سلسة وجماليات فاخرة تحقق التحويل.",
+          "contact.title": "لنتحدث",
+          "contact.sub": "تواصل احترافي ومباشر."
+        }
+      };
 
-        menuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            menuBtn.innerHTML = navLinks.classList.contains('active') ? 
-                '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars-staggered"></i>';
-        });
+      let currentLang = 'en';
+      const htmlElement = document.documentElement;
+      const body = document.body;
+      const langToggle = document.getElementById('langSwitch');
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const navLinks = document.getElementById('navLinks');
+      const navbar = document.getElementById('navbar');
 
-        function closeMenu() {
-            navLinks.classList.remove('active');
-            menuBtn.innerHTML = '<i class="fa-solid fa-bars-staggered"></i>';
+      // Apply language to all elements with data-i18n
+      function applyLanguage(lang) {
+        currentLang = lang;
+        if (lang === 'ar') {
+          htmlElement.setAttribute('dir', 'rtl');
+          htmlElement.setAttribute('lang', 'ar');
+          body.classList.add('rtl');
+          langToggle.textContent = 'EN';
+        } else {
+          htmlElement.setAttribute('dir', 'ltr');
+          htmlElement.setAttribute('lang', 'en');
+          body.classList.remove('rtl');
+          langToggle.textContent = 'AR';
         }
 
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (translations[lang] && translations[lang][key]) {
+            el.textContent = translations[lang][key];
+          }
         });
-    </script>
+
+        document.title = lang === 'ar' ? 'Qweb Designs | صفحات هبوط فاخرة' : 'Qweb Designs | High-End Landing Pages';
+      }
+
+      // Toggle language
+      langToggle.addEventListener('click', () => {
+        const newLang = currentLang === 'en' ? 'ar' : 'en';
+        applyLanguage(newLang);
+      });
+
+      // Mobile menu toggle
+      mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+      });
+
+      // Close mobile menu on link click
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          if (navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+          }
+        });
+      });
+
+      // Navbar scroll effect
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+
+      // Fade-up animation on scroll
+      const fadeElements = document.querySelectorAll('.fade-up');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.2, rootMargin: "0px 0px -50px 0px" });
+
+      fadeElements.forEach(el => observer.observe(el));
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          if (href === "#") return;
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // Initialize with English
+      applyLanguage('en');
+    })();
+  </script>
 </body>
 </html>
